@@ -191,6 +191,24 @@ var isValidChain = (blockchainToValidate) => {
     return true;
 };
 
+function testApp() {
+    function showBlockchain(inputBlockchain){
+        for (let i = 0; i < inputBlockchain.length; i++) {
+            console.log(inputBlockchain[i]);
+        }
+        console.log();
+    }
+    // showBlockchain(blockchain);
+    // console.log(calculateHashForBlock(getGenesisBlock()));
+    // addBlock Test
+    console.log("blockchain before addBlock() execution:");
+    showBlockchain(blockchain);
+    addBlock(generateNextBlock("test block data"));
+    console.log("\n");
+    console.log("blockchain after addBlock() execution:");
+    showBlockchain(blockchain);
+};
+
 var getLatestBlock = () => blockchain[blockchain.length - 1];
 var queryChainLengthMsg = () => ({'type': MessageType.QUERY_LATEST});
 var queryAllMsg = () => ({'type': MessageType.QUERY_ALL});
@@ -208,3 +226,4 @@ var broadcast = (message) => sockets.forEach(socket => write(socket, message));
 connectToPeers(initialPeers);
 initHttpServer();
 initP2PServer();
+// testApp();
